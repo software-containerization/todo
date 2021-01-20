@@ -32,10 +32,45 @@ func (c *Configuration) Load() error {
 		log.Info("No env TODO_PORT found, using port 8080")
 		c.Port = "8080"
 	}
-
+	
 	if c.DSN == "" {
-		return fmt.Errorf("No TODO_DSN environment variable found")
+
+		err := c.LoadSeparateDBCredentials()
+		if err != nil {
+			return fmt.Errorf("No database credentials found in environment. Please set TODO_DSN or separate credentials.")
+		}
 	}
 
 	return nil
 }
+
+func (c *Configuration) LoadSeparateDBCredentials() error {
+	dbName := viper.GetString("db_name")
+	dbUser := viper.GetString("db_user")
+	dbPasswd := viper.GetString("db_passwd")
+	dbHost := viper.GetString("db_host")
+	dbPort := viper.GetString("db_port")
+
+	if dbName == "" {
+		return fmt.Errorf("No TODO_DB_NAME environment variable found")
+	}
+
+	if dbUser == "" {
+		return fmt.Errorf("No TODO_DB_USER environment variable found")
+
+	}
+
+	if dbPasswd == "" {
+		return fmt.Errorf("No TODO_DB_PASSWD environment variable found")
+
+	}
+
+	if dbPort == "" {
+		return fmt.Errorf("No TODO_DB_PORT environment variable found")
+	}
+
+	c.DSN = fmt.Sprintf("%s:%s@tcp(%s:%s)/%s", dbUser, dbPasswd, dbHost, dbPort, dbName)
+	
+	return nil
+}
+
