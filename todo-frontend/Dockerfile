@@ -17,3 +17,7 @@ FROM nginx
 COPY --from=build /app/build /usr/share/nginx/html
 
 COPY /nginx-custom.conf /etc/nginx/conf.d/default.conf
+
+COPY set-api-url.sh .
+
+CMD ["sh", "./set-api-url.sh"]

@@ -3,9 +3,6 @@ import logo from './logo.svg';
 import './App.css';
 import Api from "./Api.js"
 
-const apiUrl = 'API_BASE_URL'
-console.log(apiUrl);
-
 function App() {
     const [items, setItems] = useState([]);
     const [item, setItem] = useState("");
