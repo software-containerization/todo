@@ -40,7 +40,7 @@ func (s *Server) Run(port string) {
 
 	srv := &http.Server{
 		Handler:      s.router,
-		Addr:         fmt.Sprintf("0.0.0.0:%s", port),
+		Addr:         fmt.Sprintf(":%s", port),
 		WriteTimeout: 15 * time.Second,
 		ReadTimeout:  15 * time.Second,
 	}
