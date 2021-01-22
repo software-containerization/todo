@@ -7,6 +7,7 @@ import (
 	_ "github.com/go-sql-driver/mysql" //MySQL driver
 	"github.com/google/wire"
 	"github.com/jinzhu/gorm"
+	"github.com/sirupsen/logrus"
 )
 
 // ItemRepository handles database interactions for todo items
@@ -23,7 +24,7 @@ var Set = wire.NewSet(
 func NewGormDB(c *config.Configuration) *gorm.DB {
 	db, err := gorm.Open("mysql", c.DSN)
 	if err != nil {
-		//		logrus.Fatal(err)
+		logrus.Fatal(err)
 	}
 
 	//db.AutoMigrate(&data.Item{})
