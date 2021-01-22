@@ -36,7 +36,7 @@ func (c *Configuration) Load() error {
 	if c.DSN == "" {
 		err := c.LoadSeparateDBCredentials()
 		if err != nil {
-			return fmt.Errorf("No database credentials found in environment. Please set TODO_DSN or separate credentials.")
+			//			return fmt.Errorf("No database credentials found in environment. Please set TODO_DSN or separate credentials.")
 		}
 	}
 
