@@ -3,8 +3,6 @@ import logo from './logo.svg';
 import './App.css';
 import Api from "./Api.js"
 
-const apiUrl = "http://localhost:8080/api"
-
 function App() {
     const [items, setItems] = useState([]);
     const [item, setItem] = useState("");
@@ -14,11 +12,11 @@ function App() {
         console.log(items);
         setItems(items);
     }
-    
+
     useEffect(() => {
         fetchAndSetItems();
     }, []);
-    
+
     // async function fetchItems() {
     //     const response = await fetch(apiUrl + '/items');
     //     const json = await response.json();
@@ -27,10 +25,10 @@ function App() {
 
     async function createItem(e, i) {
         const newItems = [...items];
-        
+
     }
 
-    async function handleKeyDown(e){
+    async function handleKeyDown(e) {
         if (e.key === 'Enter' && item.title !== "") {
             //create new item
             const newItem = {
@@ -58,32 +56,32 @@ function App() {
 
     return (
         <div className="App">
-          <header className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
-          </header>
+            <header className="App-header">
+                <img src={logo} className="App-logo" alt="logo" />
+            </header>
 
-          <input
-            className="new-item-input"
-            type="text"
-            value={item}
-            placeholder="Add a new item"
-            onChange={({ target }) => setItem(target.value)}
-            onKeyDown={e => handleKeyDown(e)}
+            <input
+                className="new-item-input"
+                type="text"
+                value={item}
+                placeholder="Add a new item"
+                onChange={({ target }) => setItem(target.value)}
+                onKeyDown={e => handleKeyDown(e)}
             />
-          <div className="item-list">
-              {items.map((item, i) => (
-                  <div className={`item ${item.done && 'item-is-done'}`}>
-                    <div className={'checkbox'} onClick={e => toggleCompleteItem(e, item)}>
-                      { item.done && (
-                          <span>&#x2714;</span>
-                      )}
-                  </div>
-                      <span className="item-title">{item.title}</span>
-                      <span className="delete-item"onClick={e => deleteItem(e, item.id)}>X</span>
-                      </div>
-              ))}
+            <div className="item-list">
+                {items.map((item, i) => (
+                    <div className={`item ${item.done && 'item-is-done'}`}>
+                        <div className={'checkbox'} onClick={e => toggleCompleteItem(e, item)}>
+                            {item.done && (
+                                <span>&#x2714;</span>
+                            )}
+                        </div>
+                        <span className="item-title">{item.title}</span>
+                        <span className="delete-item" onClick={e => deleteItem(e, item.id)}>X</span>
+                    </div>
+                ))}
             </div>
-            </div>
+        </div>
     );
 }
 
