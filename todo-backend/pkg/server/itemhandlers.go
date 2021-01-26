@@ -72,7 +72,7 @@ func (s *Server) handleDeleteItem() http.HandlerFunc {
 
 func (s *Server) handleUpdateItem() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		if t := r.Header.Get("Content-Type"); t != "application/json;charset=utf-8" {
+		if t := r.Header.Get("Content-Type"); t != "application/json;charset=utf-8" || t != "application/json;charset=UTF-8" {
 			http.Error(w, "Content Type is not application/json", http.StatusUnsupportedMediaType)
 			return
 		}
