@@ -27,7 +27,7 @@ func NewGormDB(c *config.Configuration) *gorm.DB {
 		logrus.Fatal(err)
 	}
 
-	//db.AutoMigrate(&data.Item{})
+	db.AutoMigrate(&data.Item{})
 
 	return db
 }
