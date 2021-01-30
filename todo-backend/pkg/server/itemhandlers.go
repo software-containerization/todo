@@ -28,11 +28,6 @@ func (s *Server) handleGetItems() http.HandlerFunc {
 
 func (s *Server) handlePostItem() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		if t := r.Header.Get("Content-Type"); t != "application/json;charset=utf-8" {
-			http.Error(w, "Content Type is not application/json", http.StatusUnsupportedMediaType)
-			return
-		}
-
 		var i data.Item
 
 		decoder := json.NewDecoder(r.Body)
@@ -72,10 +67,6 @@ func (s *Server) handleDeleteItem() http.HandlerFunc {
 
 func (s *Server) handleUpdateItem() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		if t := r.Header.Get("Content-Type"); t != "application/json;charset=utf-8" || t != "application/json;charset=UTF-8" {
-			http.Error(w, "Content Type is not application/json", http.StatusUnsupportedMediaType)
-			return
-		}
 
 		id, err := strconv.ParseUint(mux.Vars(r)["id"], 10, 16)
 		if err != nil {
